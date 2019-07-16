@@ -9,14 +9,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
-
 /**
  *
  * @author seanking
  */
 public class Order {
 
-  
     LocalDate orderDate;
     String orderNumber;
     String customerName;
@@ -30,17 +28,13 @@ public class Order {
     BigDecimal laborCost;
     BigDecimal totalTax;
 
+    public Order(String orderNumber, LocalDate orderDate) {
 
-    
-    public Order(String orderNumber, LocalDate orderDate){
-      
         this.orderNumber = orderNumber;
         this.orderDate = orderDate;
-        
+
     }
-    
-    
-  
+
     public BigDecimal getMaterialCost() {
         return materialCost;
     }
@@ -60,9 +54,6 @@ public class Order {
 //    public void setOrderNumber(String orderNumber) {
 //        this.orderNumber = orderNumber;
 //    }
-    
-    
-
     public BigDecimal getTotalTax() {
         return totalTax;
     }
@@ -88,8 +79,6 @@ public class Order {
         this.costPerSquareFoot = costPerSquareFoot;
     }
 
-  
-
     public String getProductType() {
         return productType;
     }
@@ -97,20 +86,18 @@ public class Order {
     public void setProductType(String productType) {
         this.productType = productType;
     }
-  
-    public void setOrderDate(LocalDate orderDate){
+
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
-    
+
     public LocalDate getOrderDate() {
         return orderDate;
     }
-    
 
     public String getOrderNumber() {
         return orderNumber;
     }
-
 
     public String getCustomerName() {
         return customerName;
@@ -144,7 +131,6 @@ public class Order {
         this.area = area;
     }
 
-
     public BigDecimal getTotal() {
         return total;
     }
@@ -153,7 +139,7 @@ public class Order {
         this.total = total;
     }
 
-   @Override
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 97 * hash + Objects.hashCode(this.orderDate);
@@ -186,12 +172,4 @@ public class Order {
         return true;
     }
 
- 
-
- 
-  
-    
-            
-    
-    
 }

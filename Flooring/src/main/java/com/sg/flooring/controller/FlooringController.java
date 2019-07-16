@@ -49,9 +49,6 @@ public class FlooringController {
                         removeOrder();
                         break;
                     case 5:
-                        saveCurrentWork();
-                        break;
-                    case 6:
                         keepGoing = false;
                         break;
                     default:
@@ -64,7 +61,6 @@ public class FlooringController {
         }
 
     }
-    
 
     private int getMenuSelection() {
         return view.printMenuANdGetSelection();
@@ -72,20 +68,21 @@ public class FlooringController {
 
     private void displayOrders() throws FlooringPersistenceException, OrderDoesNotExistException {
         view.displayAllOrdersBanner();
-        List <Order> orderList = service.getAllOrders();
+        view.displayOrderListInfo();
+        List<Order> orderList = service.getAllOrders();
         view.displayOrderList(orderList);
     }
 
     private void addOrder() throws FlooringPersistenceException, InvalidDataException {
         view.displayOrderCreateBanner();
         Order newOrder = view.getNewOrderInfo();
-        if(view.askToCommit().equalsIgnoreCase("Y")){
-                    service.createOrder(newOrder);
+        if (view.askToCommit().equalsIgnoreCase("Y")) {
+            service.createOrder(newOrder);
 
         } else {
             System.out.println("Order was not saved!");
         }
-        
+
         view.displayOrderCreatedSuccessBanner();
     }
 
@@ -93,18 +90,18 @@ public class FlooringController {
         view.displayOrderEditedBanner();
         String orderNumber = view.getOrderNumber();
         Order editedOrder = service.findOrder(orderNumber);
-         if (editedOrder != null) {
+        if (editedOrder != null) {
             Order orderTwo = view.getNewOrderInfo();
             if (orderNumber != orderTwo.getOrderNumber()) {
-                        LocalDate orderDate = LocalDate.now();
+                LocalDate orderDate = LocalDate.now();
 
-             service.deleteOrder(orderDate, orderNumber);
+                service.deleteOrder(orderDate, orderNumber);
                 orderNumber.equals(orderTwo.getOrderNumber());
-                
+
                 service.createOrder(orderTwo);
             } else {
-                
-               Order orderOne = service.updateOrder(orderNumber);
+
+                Order orderOne = service.updateOrder(orderNumber);
             }
             view.displayEditSuccesfulBanner();
         } else {
@@ -116,44 +113,28 @@ public class FlooringController {
     private void removeOrder() throws FlooringPersistenceException {
         view.displayDeleteOrderBanner();
         String orderNumber = view.getOrderNumber();
-        
-//          while(orderNumber.trim().equals("")){
-//            System.out.println("Not valid ,please enter a number");
-//            view.getOrderNumber();
-//        }
 
         LocalDate orderDate = view.getOrderDate();
-        
-//        while(orderDate.equals("")){
-//            System.out.println("Not valid ,please enter date with correct formatting ");
-//            view.getOrderDate();
-//        }
 
         service.deleteOrder(orderDate, orderNumber);
-        
-        if (orderNumber == null || orderDate == null){
-            
-            view.infoNotValid();
-            
-        } 
-        
-        if (orderNumber != null && orderDate != null){
-            
-        view.displayOrderDeletedSuccessfulBanner();
-        
-        }
-        
-        
-    }
 
-    private void saveCurrentWork() {
+        if (orderNumber == null || orderDate == null) {
+
+            view.infoNotValid();
+
+        }
+
+        if (orderNumber != null && orderDate != null) {
+
+            view.displayOrderDeletedSuccessfulBanner();
+
+        }
 
     }
 
     private void unknownCommand() {
         view.displayUnknownCommandBanner();
     }
-    
 
     public void exitMessage() {
         view.displayExitBanner();

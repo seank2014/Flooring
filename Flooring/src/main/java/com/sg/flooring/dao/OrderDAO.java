@@ -6,7 +6,6 @@
 package com.sg.flooring.dao;
 
 import com.sg.flooring.dto.Order;
-import com.sg.flooring.service.InvalidDataException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,8 +15,9 @@ import java.util.List;
  */
 public interface OrderDAO {
 //need to clarify between order prod and training
+
     Order createOrder(String orderNumber, Order order)
-                        throws FlooringPersistenceException;
+            throws FlooringPersistenceException;
 
     Order getOrderByNumber(String orderNumber, LocalDate orderDate)
             throws FlooringPersistenceException;

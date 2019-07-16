@@ -42,7 +42,7 @@ public class ServiceLayerImpl implements ServiceLayer {
 
     @Override
     public void createOrder(Order order)
-            throws FlooringPersistenceException, InvalidDataException{
+            throws FlooringPersistenceException, InvalidDataException {
 
         if (orderDao.getOrderByNumber(order.getOrderNumber(), LocalDate.now()) != null) {
             throw new InvalidDataException("Error: Could not create order. Order Number "
@@ -118,12 +118,12 @@ public class ServiceLayerImpl implements ServiceLayer {
 
     @Override
     public void saveCurrentWork(Order order) throws FlooringPersistenceException {
-        try {    
+        try {
             validateOrderInfo(order);
         } catch (InvalidDataException ex) {
             Logger.getLogger(ServiceLayerImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
+    }
 
     @Override
     public Order updateOrder(String orderNumber)

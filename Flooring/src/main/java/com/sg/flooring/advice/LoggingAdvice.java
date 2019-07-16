@@ -6,34 +6,31 @@
 package com.sg.flooring.advice;
 
 import com.sg.flooring.dao.FlooringAuditDao;
-import com.sg.flooring.dao.FlooringPersistenceException;
 import org.aspectj.lang.JoinPoint;
-
 
 /**
  *
  * @author seanking
  */
 public class LoggingAdvice {
-    
+
     FlooringAuditDao auditDao;
-    
-    public LoggingAdvice(FlooringAuditDao auditDao){
+
+    public LoggingAdvice(FlooringAuditDao auditDao) {
         this.auditDao = auditDao;
-        
+
     }
-    
-    public void createAuditEntry(JoinPoint jp){
-          Object[] args = jp.getArgs();
+
+    public void createAuditEntry(JoinPoint jp) {
+        Object[] args = jp.getArgs();
         String auditEntry = jp.getSignature().getName() + ": ";
-        for (Object currentArg : args){
+        for (Object currentArg : args) {
             auditEntry += currentArg;
         }
         try {
             auditDao.writeAuditEntry(auditEntry);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println("ERROR: Could not create audit entry in LoggingAdvice.");
         }
     }
-    }
-     
+}

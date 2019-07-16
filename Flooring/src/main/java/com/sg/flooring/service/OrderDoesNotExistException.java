@@ -9,14 +9,14 @@ package com.sg.flooring.service;
  *
  * @author seanking
  */
-public class OrderDoesNotExistException extends Exception{
-    
-    public OrderDoesNotExistException(String message){
-       
+public class OrderDoesNotExistException extends Exception {
+
+    public OrderDoesNotExistException(String message) {
+
     }
-    
-    public OrderDoesNotExistException(String message, Throwable casue){
-        
+
+    public OrderDoesNotExistException(String message, Throwable casue) {
+
     }
-    
+
 }

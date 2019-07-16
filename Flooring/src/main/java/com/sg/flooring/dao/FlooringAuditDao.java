@@ -10,8 +10,7 @@ package com.sg.flooring.dao;
  * @author seanking
  */
 public interface FlooringAuditDao {
-    
+
     public void writeAuditEntry(String entry);
-        
-    
+
 }

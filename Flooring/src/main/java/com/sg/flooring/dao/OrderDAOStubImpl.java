@@ -65,12 +65,12 @@ public class OrderDAOStubImpl implements OrderDAO {
     @Override
     public Order updateOrder(LocalDate orderDate, String orderNumber, Order updatedOrder)
             throws FlooringPersistenceException {
-       if (updatedOrder.equals(dao.getOrderByNumber(orderNumber, orderDate))){
-           return onlyOrder;
-       }else{
-           return null;
-       }
-        
+        if (updatedOrder.equals(dao.getOrderByNumber(orderNumber, orderDate))) {
+            return onlyOrder;
+        } else {
+            return null;
+        }
+
     }
 
     @Override
@@ -82,8 +82,5 @@ public class OrderDAOStubImpl implements OrderDAO {
         }
 
     }
-
-    
-
 
 }

@@ -13,12 +13,11 @@ import java.util.List;
  * @author seanking
  */
 public interface ProductDAO {
-    
-    Product getProductByProductType(String productType) 
+
+    Product getProductByProductType(String productType)
             throws FlooringPersistenceException;
-    
-    List<Product>getAllProducts()
+
+    List<Product> getAllProducts()
             throws FlooringPersistenceException;
-    
-    
+
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -23,8 +24,8 @@ import org.junit.Test;
  * @author seanking
  */
 public class OrderDAOTest {
-    
-    private ProductDAO pDao= new ProductDAOFileImpl();
+
+    private ProductDAO pDao = new ProductDAOFileImpl();
     private TaxDAO tDao = new TaxDAOFIleImpl();
     private OrderDAO Dao = new OrderDAOProdFileImpl(tDao, pDao);
 
@@ -60,6 +61,7 @@ public class OrderDAOTest {
 
     /**
      * Test of createOrder method, of class OrderTrainingDAO.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -77,9 +79,9 @@ public class OrderDAOTest {
         order.setLaborCost(new BigDecimal("415.0"));
         order.setTotalTax(new BigDecimal("54.0"));
         order.setTotal(new BigDecimal("900"));
-        
+
         Dao.createOrder(order.getOrderNumber(), order);
-        
+
         //Act
         Order fromDao = Dao.getOrderByNumber(order.getOrderNumber(), LocalDate.now());
 
@@ -88,13 +90,13 @@ public class OrderDAOTest {
 
     }
 
-
     /**
      * Test of getAllOrders method, of class OrderTrainingDAO.
+     *
      * @throws java.lang.Exception
      */
     @Test
-    public void testGetAllOrders() throws Exception{
+    public void testGetAllOrders() throws Exception {
         //Arrange 
         Order order1 = new Order("1", LocalDate.now());
         order1.setCustomerName("Tom");
@@ -108,11 +110,11 @@ public class OrderDAOTest {
         order1.setLaborCost(new BigDecimal("415.0"));
         order1.setTotalTax(new BigDecimal("54.0"));
         order1.setTotal(new BigDecimal("900"));
-        
+
         Dao.createOrder(order1.getOrderNumber(), order1);
-        
-         //Act 
-        Order  order2 = new Order("2", LocalDate.now());
+
+        //Act 
+        Order order2 = new Order("2", LocalDate.now());
         order2.setCustomerName("Chase");
         order2.setState("OH");
         order2.setTaxRate(new BigDecimal("6.25"));
@@ -124,29 +126,60 @@ public class OrderDAOTest {
         order2.setLaborCost(new BigDecimal("415.0"));
         order2.setTotalTax(new BigDecimal("54.0"));
         order2.setTotal(new BigDecimal("900"));
-        
+
         Dao.createOrder(order2.getOrderNumber(), order2);
-       
+
         //Assert
-        
         assertEquals(2, Dao.getAllOrders().size());
     }
 
     /**
      * Test of updateOrder method, of class OrderTrainingDAO.
+     *
+     * @throws com.sg.flooring.dao.FlooringPersistenceException
      */
     @Test
-    public void testUpdateOrder() {
+    public void testUpdateOrder() throws FlooringPersistenceException {
+        //Arrange 
+        Order order = new Order("1", LocalDate.now());
+        order.setCustomerName("weis");
+        order.setState("OH");
+        order.setTaxRate(new BigDecimal("6.25"));
+        order.setProductType("Tile");
+        order.setArea(new BigDecimal("100"));
+        order.setCostPerSquareFoot(new BigDecimal("3.50"));
+        order.setLaborCostPerSquareFoot(new BigDecimal("4.15"));
+        order.setMaterialCost(new BigDecimal("350.0"));
+        order.setLaborCost(new BigDecimal("415.0"));
+        order.setTotalTax(new BigDecimal("54.0"));
+        order.setTotal(new BigDecimal("900"));
+
+        Dao.createOrder(order.getOrderNumber(), order);
+
+        //Act
+        Order fromDao = Dao.getOrderByNumber(order.getOrderNumber(), LocalDate.now());
+        assertEquals(order, fromDao);
+
+        order.setCustomerName("Bankly");
+        Dao.updateOrder(order.getOrderDate(), order.getOrderNumber(), order);
+
+        assertNotEquals(order, fromDao);
+
+        fromDao = Dao.getOrderByNumber(order.getOrderNumber(), LocalDate.now());
+        assertEquals(order, fromDao);
+
     }
 
     /**
      * Test of deleteOrder method, of class OrderTrainingDAO.
+     *
      * @throws com.sg.flooring.dao.FlooringPersistenceException
+     * @throws com.sg.flooring.service.InvalidDataException
      */
     @Test
     public void testDeleteOrder() throws FlooringPersistenceException, InvalidDataException {
         //Arrange 
-         Order order1 = new Order("1", LocalDate.now());
+        Order order1 = new Order("1", LocalDate.now());
         order1.setCustomerName("weis");
         order1.setState("OH");
         order1.setTaxRate(new BigDecimal("6.25"));
@@ -178,20 +211,19 @@ public class OrderDAOTest {
 //        
         Dao.createOrder(order2.getOrderNumber(), order2);
         Dao.getOrderByNumber(order2.getOrderNumber(), order2.getOrderDate());
-        
-         //Act
+
+        //Act
 //
         Dao.deleteOrder(order1.getOrderNumber(), order1.getOrderDate());
-        assertEquals(1,Dao.getAllOrders().size());
+        assertEquals(1, Dao.getAllOrders().size());
         assertNull(Dao.getOrderByNumber("1", order1.getOrderDate()));
 
         //Assert
 //
         Dao.deleteOrder(order2.getOrderNumber(), order2.getOrderDate());
         assertEquals(0, Dao.getAllOrders().size());
-        assertNull(Dao.getOrderByNumber("2", order2.getOrderDate()));  
-         
-        
+        assertNull(Dao.getOrderByNumber("2", order2.getOrderDate()));
+
     }
 
 }

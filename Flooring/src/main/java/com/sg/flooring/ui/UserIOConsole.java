@@ -14,17 +14,12 @@ import java.util.Scanner;
  * @author seanking
  */
 public class UserIOConsole implements UserIO {
-     
-    Scanner myScanner = new Scanner(System.in);
 
-     
-     
-     
+    Scanner myScanner = new Scanner(System.in);
 
     @Override// bug in code, where loop will only execute twice
     public void print(String message) {
-       System.out.println(message);
-    
+        System.out.println(message);
 
     }
 
@@ -42,21 +37,18 @@ public class UserIOConsole implements UserIO {
         System.out.println(prompt);
         min = 1;
         max = 100;
-   String input = myScanner.nextLine();
-       Double doubleInput = Double.parseDouble(input);
-        
-        while(doubleInput < 1 || doubleInput > 100){
-            
+        String input = myScanner.nextLine();
+        Double doubleInput = Double.parseDouble(input);
+
+        while (doubleInput < 1 || doubleInput > 100) {
+
             doubleInput = 1.0;
-            
+
             System.out.println(prompt);
             myScanner.nextLine();
 
-         
-        } 
-            
+        }
 
-        
         return doubleInput;
     }
 
@@ -65,20 +57,20 @@ public class UserIOConsole implements UserIO {
         System.out.println(prompt);
         String input = myScanner.nextLine();
         Float floatVal = Float.parseFloat(input);
-        
+
         return floatVal;
-        
+
     }
 
     @Override
     public float readFloat(String prompt, float min, float max) {
         System.out.println(prompt);
-        min =1;
+        min = 1;
         max = 100;
         String input = myScanner.nextLine();
         Float floatVal = Float.parseFloat(input);
-        
-        while(floatVal < min || floatVal > max){
+
+        while (floatVal < min || floatVal > max) {
             floatVal = 1f;
             System.out.println(prompt);
             myScanner.nextLine();
@@ -88,34 +80,31 @@ public class UserIOConsole implements UserIO {
 
     @Override
     public int readInt(String prompt) {
-            System.out.println(prompt);
-            String input = myScanner.nextLine();
-            int intInput = Integer.parseInt(input);
-            
-            return intInput;
+        System.out.println(prompt);
+        String input = myScanner.nextLine();
+        int intInput = Integer.parseInt(input);
 
+        return intInput;
 
     }
 
     @Override
     public int readInt(String prompt, int min, int max) {
+        System.out.println(prompt);
+        min = 1;
+        max = 100;
+        String input = myScanner.nextLine();
+        int intValue = Integer.parseInt(input);
+
+        while (intValue < 1 || intValue > 100) {
+
             System.out.println(prompt);
-            min = 1;
-            max = 100;
-            String input = myScanner.nextLine();
-            int intValue = Integer.parseInt(input);
-            
-            while(intValue < 1 || intValue > 100){
-                
-                System.out.println(prompt);
-                myScanner.nextLine();
-                intValue = 1;
+            myScanner.nextLine();
+            intValue = 1;
 
-            }
-            
-            return intValue;
-            
+        }
 
+        return intValue;
 
     }
 
@@ -124,7 +113,7 @@ public class UserIOConsole implements UserIO {
         System.out.println(prompt);
         String input = myScanner.nextLine();
         long longInput = Long.parseLong(input);
-        
+
         return longInput;
 
     }
@@ -132,24 +121,24 @@ public class UserIOConsole implements UserIO {
     @Override
     public long readLong(String prompt, long min, long max) {
         System.out.println(prompt);
-        String input =myScanner.nextLine();
-        min =1;
-        max =100;
+        String input = myScanner.nextLine();
+        min = 1;
+        max = 100;
         long longVal = Long.parseLong(input);
-        
-        while (longVal < 1 || longVal > 100){
-            longVal = 1; 
+
+        while (longVal < 1 || longVal > 100) {
+            longVal = 1;
             System.out.println(prompt);
-            myScanner.nextLine();  
+            myScanner.nextLine();
         }
-        
+
         return longVal;
-        
+
     }
 
     @Override
     public String readString(String prompt) {
-         System.out.println(prompt);
+        System.out.println(prompt);
         String input = myScanner.nextLine();
         return input;
     }
@@ -166,18 +155,18 @@ public class UserIOConsole implements UserIO {
 
     @Override
     public BigDecimal readBigDecimal(String prompt, BigDecimal min, BigDecimal max) {
-        
+
         System.out.println(prompt);
-        String input =myScanner.nextLine();
+        String input = myScanner.nextLine();
         min = new BigDecimal("1.00");
         max = new BigDecimal("1000000.00");
         BigDecimal bigDecimal = new BigDecimal(input);
-        
-        while (bigDecimal.compareTo(min)< -1 || bigDecimal.compareTo(max) < 1) {
+
+        while (bigDecimal.compareTo(min) < -1 || bigDecimal.compareTo(max) < 1) {
             bigDecimal = new BigDecimal("1.00");
             System.out.println(prompt);
-            myScanner.nextLine();     
-        }        
+            myScanner.nextLine();
+        }
         return bigDecimal;
     }
 
@@ -186,7 +175,7 @@ public class UserIOConsole implements UserIO {
         System.out.println(prompt);
         String input = myScanner.nextLine();
         LocalDate localDate = LocalDate.parse(input);
-        return localDate;    
+        return localDate;
     }
 
     @Override
@@ -196,9 +185,8 @@ public class UserIOConsole implements UserIO {
         min = LocalDate.MIN;
         max = LocalDate.MAX;
         LocalDate localDate = LocalDate.parse(input);
-        
-        
-        while(localDate.compareTo(min) > -1 || localDate.compareTo(max) < 1){
+
+        while (localDate.compareTo(min) > -1 || localDate.compareTo(max) < 1) {
             localDate = LocalDate.MIN;
             System.out.println(prompt);
             myScanner.nextLine();
@@ -206,5 +194,5 @@ public class UserIOConsole implements UserIO {
         return localDate;
 
     }
-    
+
 }

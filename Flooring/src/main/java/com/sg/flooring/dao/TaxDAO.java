@@ -15,6 +15,6 @@ import java.util.List;
 public interface TaxDAO {
 
     List<Tax> loadTaxes()
-    throws FlooringPersistenceException;
+            throws FlooringPersistenceException;
 
 }

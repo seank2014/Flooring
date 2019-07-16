@@ -12,11 +12,11 @@ import java.math.BigDecimal;
  * @author seanking
  */
 public class Tax {
-    
+
     String state;
     BigDecimal taxRate;
-    
- public Tax(String state){
+
+    public Tax(String state) {
         this.state = state;
     }
 
@@ -38,8 +38,5 @@ public class Tax {
     public void setTaxRate(BigDecimal taxRate) {
         this.taxRate = taxRate;
     }
-    
-    
-    
-    
+
 }

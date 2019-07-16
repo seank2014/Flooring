@@ -22,25 +22,23 @@ import java.util.Scanner;
  *
  * @author seanking
  */
-public class OrderDaoTrainingFileImpl implements OrderDAO{
-    
+public class OrderDaoTrainingFileImpl implements OrderDAO {
+
     private final TaxDAO tDao;
     private final ProductDAO pDao;
-    
-    public OrderDaoTrainingFileImpl(TaxDAO tDao, ProductDAO pDao){
+
+    public OrderDaoTrainingFileImpl(TaxDAO tDao, ProductDAO pDao) {
         this.pDao = pDao;
         this.tDao = tDao;
-        
+
     }
-    
+
     public Map<String, Order> orders = new HashMap<>();
-    public static final  String ORDER_FILE = "Orders_" + LocalDate.now().format(DateTimeFormatter.ofPattern("MMddYYYY")) + ".txt";
+    public static final String ORDER_FILE = "Orders_" + LocalDate.now().format(DateTimeFormatter.ofPattern("MMddYYYY")) + ".txt";
     public static final String DELIMITER = ",";
 
-
-     @Override
-    public Order createOrder(String orderNumber, Order order) throws FlooringPersistenceException
-          {
+    @Override
+    public Order createOrder(String orderNumber, Order order) throws FlooringPersistenceException {
         Order newOrder = orders.put(orderNumber, order);
         return newOrder;
 
@@ -101,10 +99,10 @@ public class OrderDaoTrainingFileImpl implements OrderDAO{
             currentLine = scanner.nextLine();
 
             currentTokens = currentLine.split(DELIMITER);
-            
+
             Order currentOrder = new Order(currentTokens[0], LocalDate.now());
-            
-             currentOrder.setCustomerName(currentTokens[1]);
+
+            currentOrder.setCustomerName(currentTokens[1]);
             currentOrder.setState((currentTokens[2]));
             currentOrder.setTaxRate(new BigDecimal(currentTokens[3]));
             currentOrder.setProductType((currentTokens[4]));
@@ -115,10 +113,7 @@ public class OrderDaoTrainingFileImpl implements OrderDAO{
             currentOrder.setLaborCost(new BigDecimal(currentTokens[9]));
             currentOrder.setTotalTax(new BigDecimal(currentTokens[10]));
             currentOrder.setTotal(new BigDecimal(currentTokens[11]));
-            
-            //Make another class called "Order mapper" method toOrder(){ returns currentOrder(that information was parsed into)}
-            //test will show if order is returned and if it has what I expect to be there
-            //line 79 - 90 goes in class then, call that method here
+
             orders.put(currentOrder.getOrderNumber(), currentOrder);
 
         }

@@ -6,7 +6,6 @@
 package com.sg.flooring.dao;
 
 import com.sg.flooring.dto.Order;
-import com.sg.flooring.service.InvalidDataException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -162,8 +161,6 @@ public class OrderDAOProdFileImpl implements OrderDAO {
                     + currentOrder.getLaborCost() + DELIMITER
                     + currentOrder.getTotalTax() + DELIMITER
                     + currentOrder.getTotal()
-            //everything inside print line put in mapper class in another method
-            //also create test file for Mapper
 
             );
             // force PrintWriter to write line to the file

@@ -10,13 +10,12 @@ package com.sg.flooring.dao;
  * @author seanking
  */
 public class FlooringAuditFileImpl implements FlooringAuditDao {
-    
+
     public static final String AUDIT_FILE = "audit.txt";
 
     @Override
     public void writeAuditEntry(String entry) {
-        
+
     }
-    
-    
+
 }
